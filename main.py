@@ -42,6 +42,10 @@ def main():
             "entry.png is %dx%d, expected 1024x1024" % (width, height))
     os.makedirs(OUT_DIR, exist_ok=True)
     shutil.copyfile(SRC, OUT_PATH)
+    written = os.path.getsize(OUT_PATH)
+    if written != size:
+        raise ValueError(
+            "wrote %d bytes to %s, expected %d" % (written, OUT_PATH, size))
     print("wrote %s (%d bytes, %dx%d)" % (OUT_PATH, size, width, height))
     return 0
 
